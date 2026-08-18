@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script
+        src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body style="background-image: linear-gradient(#fc9840,#fe5f75);">
+    <nav class="flex justify-between  px-4 py-5">
+        <div>
+            <h1>Your Logo</h1>
+        </div>
+        <div class="flex  gap-5">
+            <h1 class="hover:text-green-500 cursor-pointer text-white ">Home</h1>
+            <h1 class="hover:text-green-500 cursor-pointer text-white " onclick="onchangeView('image')">Photos</h1>
+            <h1 class="hover:text-green-500 cursor-pointer text-white " onclick="onchangeView('video')">Videos</h1>
+
+        </div>
+    </nav>
+
+    <section>
+        <header>
+            <h1 class="text-center text-4xl mt-12" style="font-family: ' Poppins', sans-serif; font-weight: 600;
+                 ">Past Events Gallery</h1>
+            <div class=" justify-center flex gap-4 mt-8">
+                <button class="bg-blue-400 hover:bg-blue-500 px-4 py-2 rounded-md text-white"
+                    onclick="onchangeView('image')">Image</button>
+                <button class="bg-blue-400 hover:bg-blue-500 px-4 py-2 rounded-md text-white"
+                    onclick="onchangeView('video')">Videos</button>
+            </div>
+        </header>
+        <div class="flex justify-center" id="photos">
+            <main class="flex  gap-6 mt-12 justify-center flex-wrap wrap">
+                <div
+                    class="h-[400px] w-[400px] overflow-hidden rounded-md  cursor-pointer hover:scale-125 hover:duration-2s hover:transition-all hover:ease-in-out">
+                    <img src="IMG 1.jpg" alt="" class="w-full h-full ">
+                </div>
+                <div
+                    class="h-[400px] w-[400px] overflow-hidden rounded-md cursor-pointer hover:scale-125 hover:duration-2s hover:transition-all hover:ease-in-out">
+                    <img src="advitya.jpg" alt="" class="w-full h-full ">
+                </div>
+
+                <div
+                    class="h-[400px] w-[400px] overflow-hidden rounded-md cursor-pointer hover:scale-125 hover:duration-2s hover:transition-all hover:ease-in-out">
+                    <img src="ganeshaya.jpg" alt="" class="w-full h-full ">
+                </div>
+                <div
+                    class="h-[400px] w-[400px] overflow-hidden rounded-md cursor-pointer hover:scale-125 hover:duration-2s hover:transition-all hover:ease-in-out">
+                    <img src="rajasthan.jpg" alt="" class="w-full h-full ">
+                </div>
+                <div
+                    class="h-[400px] w-[400px] overflow-hidden rounded-md cursor-pointer hover:scale-125 hover:duration-2s hover:transition-all hover:ease-in-out">
+                    <img src="rangotsav.jpg" alt="" class="w-full h-full ">
+                </div>
+                <div
+                    class="h-[400px] w-[400px] overflow-hidden rounded-md cursor-pointer hover:scale-125 hover:duration-2s hover:transition-all hover:ease-in-out">
+                    <img src="convocation.jpg" alt="" class="w-full h-full ">
+                </div>
+            </main>
+        </div>
+        <div class="flex justify-center" style="display: none" id="videos">
+            <main class="flex  gap-6 mt-12 justify-center flex-wrap wrap">
+                <div class="flex justify-evenly wrap flex-wrap gap-7">
+                    <video src="Holi.mp4" width="300" autoplay controls muted class="rounded-md"></video>
+                    <video src="Garba.mp4" width="300" autoplay controls muted class="rounded-md"></video>
+                    <video src="convo.mp4" width="300" autoplay controls muted class="rounded-md"></video>
+                    <video src="MC.mp4" width="300" autoplay controls muted class="rounded-md"></video>
+                    <video src="Pd.mp4" width="300" autoplay controls muted class="rounded-md"></video>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <script>
+
+        const onchangeView = (view) => {
+            const video = document.getElementById("videos");
+            const image = document.getElementById("photos")
+            if (view == "image") {
+                video.style.display = "none";
+                image.style.display = "flex";
+            } else {
+                video.style.display = "flex";
+                image.style.display = "none";
+            }
+        };
+
+    </script>
+
+</body>
+
+</html>
