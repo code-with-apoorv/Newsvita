@@ -3,572 +3,333 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NewsVita — Official Campus Media & Event Portal | VIT Bhopal</title>
-  <meta name="description" content="Authentic campus media, festivals, and event highlights from VIT Bhopal University.">
+  <title>NewsVita — Past Events & Campus Highlights | VIT Bhopal University</title>
+  <meta name="description" content="Official campus media and past events gallery of VIT Bhopal University. Featuring Ganesh Utsav, Advitiya Tech Fest, Rangotsav, and Convocation Day.">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              500: '#f97316',
-              600: '#ea580c',
-            }
-          },
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-            heading: ['Poppins', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
-
-  <!-- Google Fonts -->
+  
+  <!-- Google Fonts (Poppins & Plus Jakarta Sans) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Poppins', 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fc9840 0%, #fe5f75 100%);
+      background-attachment: fixed;
+      color: #ffffff;
+    }
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+    .photo-card {
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .photo-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.25);
+    }
+    .photo-card img {
+      transition: transform 0.5s ease;
+    }
+    .photo-card:hover img {
+      transform: scale(1.06);
+    }
+    .toggle-btn.active {
+      background: #ffffff !important;
+      color: #fe5f75 !important;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+    }
+  </style>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📸</text></svg>">
 </head>
-<body class="bg-[#0B0F17] text-slate-100 min-h-screen flex flex-col antialiased">
+<body class="flex flex-col min-h-screen">
 
-  <!-- ================= TOP HEADER ================= -->
-  <header class="sticky top-0 z-40 bg-[#0B0F17]/95 border-b border-slate-800/80 backdrop-blur-md">
-    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-      
-      <!-- Brand Logo -->
-      <a href="#home" class="flex items-center space-x-2.5 group text-decoration-none">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-500 via-pink-500 to-purple-600 p-0.5 shadow-md">
-          <div class="w-full h-full bg-[#0B0F17] rounded-[10px] flex items-center justify-center">
-            <span class="text-xl">📸</span>
-          </div>
-        </div>
-        <div>
-          <span class="text-lg font-bold text-white tracking-tight">News<span class="text-orange-500">Vita</span></span>
-          <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 font-semibold ml-1.5">VIT Bhopal</span>
-        </div>
+  <!-- ================= NAVBAR ================= -->
+  <nav class="sticky top-0 z-40 glass-nav px-4 sm:px-8 py-4 flex justify-between items-center">
+    
+    <!-- Brand Logo -->
+    <a href="#" class="flex items-center space-x-2.5 text-white no-underline group">
+      <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform">
+        <span class="text-xl">🦁</span>
+      </div>
+      <div>
+        <h1 class="text-xl sm:text-2xl font-black tracking-tight text-white leading-none">News<span class="text-yellow-200">Vita</span></h1>
+        <p class="text-[10px] text-white/80 font-medium">VIT Bhopal University</p>
+      </div>
+    </a>
+
+    <!-- Nav Links & Toggle -->
+    <div class="flex items-center space-x-3 sm:space-x-6 text-sm font-semibold">
+      <button onclick="onchangeView('image')" class="hover:text-yellow-200 cursor-pointer transition-colors flex items-center gap-1.5">
+        <i data-lucide="image" class="w-4 h-4"></i>
+        <span>Photos</span>
+      </button>
+      <button onclick="onchangeView('video')" class="hover:text-yellow-200 cursor-pointer transition-colors flex items-center gap-1.5">
+        <i data-lucide="play-circle" class="w-4 h-4"></i>
+        <span>Videos</span>
+      </button>
+      <a href="https://www.instagram.com/vit.bhopal" target="_blank" class="hidden sm:flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full bg-white/20 hover:bg-white/30 text-white transition-all text-xs font-bold border border-white/30">
+        <i data-lucide="instagram" class="w-3.5 h-3.5"></i>
+        <span>@vit.bhopal</span>
       </a>
+    </div>
 
-      <!-- Search Input -->
-      <div class="hidden sm:block max-w-xs w-full">
-        <div class="relative">
-          <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400"></i>
-          <input 
-            type="text" 
-            id="search-input" 
-            placeholder="Search posts (Ganesh, Holi, Advitiya)..." 
-            class="w-full pl-9 pr-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-orange-500">
-        </div>
-      </div>
+  </nav>
 
-      <!-- Navigation & Profile Links -->
-      <div class="flex items-center space-x-3 text-xs font-semibold">
-        <a href="#gallery-section" class="px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-colors">
-          Feed
-        </a>
-        <a href="https://www.instagram.com/vit.bhopal" target="_blank" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-pink-600 to-orange-500 text-white font-bold hover:opacity-95 transition-opacity flex items-center space-x-1.5">
-          <i data-lucide="instagram" class="w-3.5 h-3.5"></i>
-          <span>Instagram</span>
-        </a>
-      </div>
+  <!-- ================= HEADER SECTION ================= -->
+  <header class="text-center px-4 pt-10 pb-6 max-w-4xl mx-auto">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/20 border border-white/30 text-xs text-white font-semibold mb-3">
+      <span>🏛️</span>
+      <span>Official Campus Gallery & Media Archive</span>
+    </div>
+    <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-white drop-shadow-sm">
+      Past Events Gallery
+    </h2>
+    <p class="mt-3 text-sm sm:text-base text-white/90 max-w-xl mx-auto font-medium">
+      Relive the most memorable moments from Ganesh Chaturthi, Advitiya Tech Fest, Rangotsav Holi, and Annual Convocation Day.
+    </p>
 
+    <!-- View Switcher Tabs -->
+    <div class="justify-center flex gap-3 mt-8">
+      <button id="btn-photos" class="toggle-btn active bg-white/20 hover:bg-white/30 text-white px-6 py-2.5 rounded-full text-sm font-bold border border-white/30 transition-all flex items-center gap-2"
+              onclick="onchangeView('image')">
+        <i data-lucide="images" class="w-4 h-4"></i>
+        <span>Photos (6)</span>
+      </button>
+      <button id="btn-videos" class="toggle-btn bg-white/20 hover:bg-white/30 text-white px-6 py-2.5 rounded-full text-sm font-bold border border-white/30 transition-all flex items-center gap-2"
+              onclick="onchangeView('video')">
+        <i data-lucide="video" class="w-4 h-4"></i>
+        <span>Videos (5)</span>
+      </button>
     </div>
   </header>
 
-  <!-- ================= INSTAGRAM STORIES ROW ================= -->
-  <section class="py-4 border-b border-slate-800/80 bg-slate-950/40 overflow-x-auto no-scrollbar">
-    <div class="max-w-6xl mx-auto px-4 flex items-center space-x-6">
+  <!-- ================= PHOTOS GALLERY ================= -->
+  <section class="max-w-6xl mx-auto px-4 pb-16 w-full" id="photos">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
       
-      <!-- Story: Ganesh Chaturthi -->
-      <div class="flex flex-col items-center space-y-1 shrink-0 cursor-pointer group" onclick="document.querySelector('[data-filter=\'festivals\']').click();">
-        <div class="p-0.5 rounded-full bg-gradient-to-tr from-yellow-400 via-orange-500 to-pink-500">
-          <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-[#0B0F17] bg-slate-900">
-            <img src="assets/images/festivals/ganesh-chaturthi-1.jpg" alt="Ganesh Utsav" class="w-full h-full object-cover">
-          </div>
+      <!-- Card 1: Ganesh Chaturthi 1 -->
+      <div class="glass-card rounded-2xl overflow-hidden shadow-lg photo-card flex flex-col justify-between" onclick="openLightbox('IMG 1.jpg', 'Ganesh Chaturthi Sthapana', 'Lord Ganesha Sthapana & Cultural Puja')">
+        <div class="h-64 overflow-hidden cursor-pointer bg-black/20">
+          <img src="IMG 1.jpg" alt="Ganesh Chaturthi Celebration" class="w-full h-full object-cover">
         </div>
-        <span class="text-[11px] font-medium text-slate-300">Ganesh Utsav</span>
+        <div class="p-4 bg-white/10 border-t border-white/15 text-left">
+          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-yellow-400 text-slate-900">Festival</span>
+          <h3 class="text-base font-bold text-white mt-1.5">Ganesh Chaturthi Celebration</h3>
+          <p class="text-xs text-white/80 mt-1">Lord Ganesha Sthapana & traditional aarti chanting on campus.</p>
+        </div>
       </div>
 
-      <!-- Story: Advitiya Fest -->
-      <div class="flex flex-col items-center space-y-1 shrink-0 cursor-pointer group" onclick="document.querySelector('[data-filter=\'events\']').click();">
-        <div class="p-0.5 rounded-full bg-gradient-to-tr from-cyan-400 via-indigo-500 to-purple-500">
-          <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-[#0B0F17] bg-slate-900">
-            <img src="assets/images/events/advitya-fest.jpg" alt="Advitiya Fest" class="w-full h-full object-cover">
-          </div>
+      <!-- Card 2: Advitiya Fest -->
+      <div class="glass-card rounded-2xl overflow-hidden shadow-lg photo-card flex flex-col justify-between" onclick="openLightbox('advitya.jpg', 'Advitiya Annual Tech Fest', 'Robotics, Hackathons & Coding Arenas')">
+        <div class="h-64 overflow-hidden cursor-pointer bg-black/20">
+          <img src="advitya.jpg" alt="Advitiya Tech Fest" class="w-full h-full object-cover">
         </div>
-        <span class="text-[11px] font-medium text-slate-300">Advitiya '26</span>
+        <div class="p-4 bg-white/10 border-t border-white/15 text-left">
+          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-cyan-300 text-slate-900">Tech Fest</span>
+          <h3 class="text-base font-bold text-white mt-1.5">Advitiya '26 Tech Conclave</h3>
+          <p class="text-xs text-white/80 mt-1">Central India's flagship techno-cultural fest & hackathon.</p>
+        </div>
       </div>
 
-      <!-- Story: Holi Celebrations -->
-      <div class="flex flex-col items-center space-y-1 shrink-0 cursor-pointer group" onclick="document.querySelector('[data-filter=\'festivals\']').click();">
-        <div class="p-0.5 rounded-full bg-gradient-to-tr from-pink-500 via-purple-500 to-yellow-400">
-          <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-[#0B0F17] bg-slate-900">
-            <img src="assets/images/festivals/rangotsav.jpg" alt="Rangotsav" class="w-full h-full object-cover">
-          </div>
+      <!-- Card 3: Ganesh Utsav / Ganeshaya -->
+      <div class="glass-card rounded-2xl overflow-hidden shadow-lg photo-card flex flex-col justify-between" onclick="openLightbox('ganeshaya.jpg', 'Ganesh Utsav Dhol Tasha', 'High-energy festive celebration on campus')">
+        <div class="h-64 overflow-hidden cursor-pointer bg-black/20">
+          <img src="ganeshaya.jpg" alt="Ganesh Utsav Dhol Tasha" class="w-full h-full object-cover">
         </div>
-        <span class="text-[11px] font-medium text-slate-300">Rangotsav</span>
+        <div class="p-4 bg-white/10 border-t border-white/15 text-left">
+          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-yellow-400 text-slate-900">Festival</span>
+          <h3 class="text-base font-bold text-white mt-1.5">Ganesh Utsav Dhol Tasha</h3>
+          <p class="text-xs text-white/80 mt-1">Rhythmic beats, festive colors, and grand campus procession.</p>
+        </div>
       </div>
 
-      <!-- Story: Convocation Day -->
-      <div class="flex flex-col items-center space-y-1 shrink-0 cursor-pointer group" onclick="document.querySelector('[data-filter=\'events\']').click();">
-        <div class="p-0.5 rounded-full bg-gradient-to-tr from-emerald-400 via-teal-500 to-sky-500">
-          <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-[#0B0F17] bg-slate-900">
-            <img src="assets/images/events/convocation-day.jpg" alt="Convocation" class="w-full h-full object-cover">
-          </div>
+      <!-- Card 4: Rajasthan Tour -->
+      <div class="glass-card rounded-2xl overflow-hidden shadow-lg photo-card flex flex-col justify-between" onclick="openLightbox('rajasthan.jpg', 'Rajasthan Cultural Tour', 'Student heritage and cultural expedition')">
+        <div class="h-64 overflow-hidden cursor-pointer bg-black/20">
+          <img src="rajasthan.jpg" alt="Rajasthan Tour" class="w-full h-full object-cover">
         </div>
-        <span class="text-[11px] font-medium text-slate-300">Convocation</span>
+        <div class="p-4 bg-white/10 border-t border-white/15 text-left">
+          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-300 text-slate-900">Tour</span>
+          <h3 class="text-base font-bold text-white mt-1.5">Rajasthan Cultural Tour</h3>
+          <p class="text-xs text-white/80 mt-1">Student exploration of royal heritage and historical landmarks.</p>
+        </div>
       </div>
 
-      <!-- Story: Rajasthan Tour -->
-      <div class="flex flex-col items-center space-y-1 shrink-0 cursor-pointer group" onclick="document.querySelector('[data-filter=\'events\']').click();">
-        <div class="p-0.5 rounded-full bg-gradient-to-tr from-amber-400 via-orange-500 to-red-500">
-          <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-[#0B0F17] bg-slate-900">
-            <img src="assets/images/events/rajasthan-cultural-tour.jpg" alt="Rajasthan Tour" class="w-full h-full object-cover">
-          </div>
+      <!-- Card 5: Rangotsav Holi -->
+      <div class="glass-card rounded-2xl overflow-hidden shadow-lg photo-card flex flex-col justify-between" onclick="openLightbox('rangotsav.jpg', 'Rangotsav Holi Celebration', 'Vibrant colors of joy and student unity')">
+        <div class="h-64 overflow-hidden cursor-pointer bg-black/20">
+          <img src="rangotsav.jpg" alt="Rangotsav Holi" class="w-full h-full object-cover">
         </div>
-        <span class="text-[11px] font-medium text-slate-300">Campus Tour</span>
+        <div class="p-4 bg-white/10 border-t border-white/15 text-left">
+          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-pink-300 text-slate-900">Festival</span>
+          <h3 class="text-base font-bold text-white mt-1.5">Rangotsav — Campus Holi</h3>
+          <p class="text-xs text-white/80 mt-1">Organic gulal, music, and festive celebrations on the lawn.</p>
+        </div>
       </div>
 
-      <!-- Story: Video Reels -->
-      <div class="flex flex-col items-center space-y-1 shrink-0 cursor-pointer group" onclick="document.querySelector('[data-filter=\'videos\']').click();">
-        <div class="p-0.5 rounded-full bg-gradient-to-tr from-red-500 via-rose-500 to-pink-500">
-          <div class="w-14 h-14 rounded-full overflow-hidden border-2 border-[#0B0F17] bg-slate-900 flex items-center justify-center bg-slate-950">
-            <i data-lucide="play" class="w-5 h-5 text-white fill-white ml-0.5"></i>
-          </div>
+      <!-- Card 6: Convocation Day -->
+      <div class="glass-card rounded-2xl overflow-hidden shadow-lg photo-card flex flex-col justify-between" onclick="openLightbox('convocation.jpg', 'Annual Convocation Day', 'Celebrating the graduation of engineering batch')">
+        <div class="h-64 overflow-hidden cursor-pointer bg-black/20">
+          <img src="convocation.jpg" alt="Convocation Day" class="w-full h-full object-cover">
         </div>
-        <span class="text-[11px] font-medium text-slate-300">Video Reels</span>
+        <div class="p-4 bg-white/10 border-t border-white/15 text-left">
+          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-300 text-slate-900">Academic</span>
+          <h3 class="text-base font-bold text-white mt-1.5">Annual Convocation Ceremony</h3>
+          <p class="text-xs text-white/80 mt-1">Graduating engineers receiving their academic degrees.</p>
+        </div>
       </div>
 
     </div>
   </section>
 
-  <!-- ================= CAMPUS PROFILE HEADER ================= -->
-  <section id="home" class="py-8 border-b border-slate-800/60 max-w-6xl mx-auto px-4 w-full">
-    <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+  <!-- ================= VIDEOS GALLERY ================= -->
+  <section class="max-w-6xl mx-auto px-4 pb-16 w-full" style="display: none;" id="videos">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
       
-      <!-- Profile Avatar -->
-      <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 bg-gradient-to-tr from-orange-500 to-pink-600 shrink-0">
-        <div class="w-full h-full rounded-full overflow-hidden bg-slate-950 border-2 border-[#0B0F17] flex items-center justify-center">
-          <span class="text-4xl">🦁</span>
+      <!-- Video 1: Holi Celebration -->
+      <div class="glass-card rounded-2xl overflow-hidden shadow-lg flex flex-col justify-between">
+        <div class="h-64 bg-black/40 flex items-center justify-center overflow-hidden">
+          <video src="Holi.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
+        </div>
+        <div class="p-4 bg-white/10 border-t border-white/15">
+          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-pink-300 text-slate-900">Reel</span>
+          <h3 class="text-base font-bold text-white mt-1.5">Holi Celebration Highlights</h3>
+          <p class="text-xs text-white/80 mt-1">Festive campus colors and celebration video.</p>
         </div>
       </div>
 
-      <!-- Profile Bio -->
-      <div class="flex-grow text-center sm:text-left space-y-2">
-        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3">
-          <h1 class="text-xl sm:text-2xl font-bold text-white">vitbhopal.campus</h1>
-          <span class="text-xs px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-400 font-semibold border border-blue-500/30 flex items-center gap-1">
-            <i data-lucide="check" class="w-3 h-3"></i> Official Archive
-          </span>
+      <!-- Video 2: Garba Night -->
+      <div class="glass-card rounded-2xl overflow-hidden shadow-lg flex flex-col justify-between">
+        <div class="h-64 bg-black/40 flex items-center justify-center overflow-hidden">
+          <video src="Garba.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
         </div>
+        <div class="p-4 bg-white/10 border-t border-white/15">
+          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-yellow-300 text-slate-900">Reel</span>
+          <h3 class="text-base font-bold text-white mt-1.5">Garba & Dandiya Night</h3>
+          <p class="text-xs text-white/80 mt-1">Navratri Dandiya Raas on the open lawn.</p>
+        </div>
+      </div>
 
-        <p class="text-xs sm:text-sm text-slate-300 max-w-xl">
-          🏛️ <b>VIT Bhopal University</b> Media & Event Gallery<br>
-          🎉 Documenting Ganesh Utsav, Advitiya Tech Fest, Holi & Convocation Memories<br>
-          📍 Bhopal - Indore Highway, Kothri Kalan, Madhya Pradesh
-        </p>
+      <!-- Video 3: Convocation Ceremony -->
+      <div class="glass-card rounded-2xl overflow-hidden shadow-lg flex flex-col justify-between">
+        <div class="h-64 bg-black/40 flex items-center justify-center overflow-hidden">
+          <video src="convo.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
+        </div>
+        <div class="p-4 bg-white/10 border-t border-white/15">
+          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-300 text-slate-900">Reel</span>
+          <h3 class="text-base font-bold text-white mt-1.5">Convocation Day Ceremony</h3>
+          <p class="text-xs text-white/80 mt-1">Graduation speech & cap toss moments.</p>
+        </div>
+      </div>
 
-        <!-- Stats Counter -->
-        <div class="flex items-center justify-center sm:justify-start space-x-6 pt-2 text-xs">
-          <div><b class="text-white text-sm">12</b> <span class="text-slate-400">posts</span></div>
-          <div><b class="text-white text-sm">15.4K</b> <span class="text-slate-400">students</span></div>
-          <div><b class="text-white text-sm">50+</b> <span class="text-slate-400">clubs</span></div>
+      <!-- Video 4: Music Concert -->
+      <div class="glass-card rounded-2xl overflow-hidden shadow-lg flex flex-col justify-between">
+        <div class="h-64 bg-black/40 flex items-center justify-center overflow-hidden">
+          <video src="MC.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
+        </div>
+        <div class="p-4 bg-white/10 border-t border-white/15">
+          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-purple-300 text-slate-900">Reel</span>
+          <h3 class="text-base font-bold text-white mt-1.5">Live Music & Pro-Concert</h3>
+          <p class="text-xs text-white/80 mt-1">Student acoustic band live stage performance.</p>
+        </div>
+      </div>
+
+      <!-- Video 5: Personality Development -->
+      <div class="glass-card rounded-2xl overflow-hidden shadow-lg flex flex-col justify-between">
+        <div class="h-64 bg-black/40 flex items-center justify-center overflow-hidden">
+          <video src="Pd.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
+        </div>
+        <div class="p-4 bg-white/10 border-t border-white/15">
+          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-sky-300 text-slate-900">Reel</span>
+          <h3 class="text-base font-bold text-white mt-1.5">Personality Development Seminar</h3>
+          <p class="text-xs text-white/80 mt-1">Professional training & student workshop session.</p>
         </div>
       </div>
 
     </div>
   </section>
-
-  <!-- ================= FILTER TABS ================= -->
-  <section id="gallery-section" class="max-w-6xl mx-auto px-4 pt-6 pb-4 w-full">
-    <div class="flex items-center justify-center sm:justify-start space-x-2 border-b border-slate-800 pb-3 overflow-x-auto no-scrollbar">
-      <button class="filter-btn active px-4 py-2 rounded-xl text-xs font-semibold" data-filter="all">
-        <i data-lucide="grid" class="w-3.5 h-3.5 inline mr-1"></i> All Posts (12)
-      </button>
-      <button class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 bg-slate-900 border border-slate-800 hover:text-white" data-filter="festivals">
-        🪔 Festivals (4)
-      </button>
-      <button class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 bg-slate-900 border border-slate-800 hover:text-white" data-filter="events">
-        ⚡ Campus Events (3)
-      </button>
-      <button class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 bg-slate-900 border border-slate-800 hover:text-white" data-filter="videos">
-        🎥 Video Reels (5)
-      </button>
-    </div>
-  </section>
-
-  <!-- ================= MEDIA POSTS FEED ================= -->
-  <main class="max-w-6xl mx-auto px-4 pb-16 flex-grow w-full">
-    <div id="media-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-      <!-- Post 1: Ganesh Chaturthi 1 -->
-      <div class="media-item bg-slate-900/90 rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between"
-           data-category="festivals" data-type="image" data-title="Ganesh Chaturthi Celebration" data-desc="Lord Ganesha Sthapana & Cultural Puja at VIT Bhopal">
-        <div class="p-3.5 flex items-center justify-between border-b border-slate-800/60">
-          <div class="flex items-center space-x-2.5">
-            <div class="w-7 h-7 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold text-xs">🦁</div>
-            <div>
-              <div class="text-xs font-bold text-white">vitbhopal.campus</div>
-              <div class="text-[10px] text-slate-400">VIT Bhopal Lawn</div>
-            </div>
-          </div>
-          <span class="text-[10px] text-orange-400 font-semibold px-2 py-0.5 rounded bg-orange-500/10">Festival</span>
-        </div>
-        <div class="h-64 bg-black overflow-hidden cursor-pointer">
-          <img src="assets/images/festivals/ganesh-chaturthi-1.jpg" alt="Ganesh Chaturthi Celebration" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
-        </div>
-        <div class="p-4 text-xs">
-          <div class="flex items-center space-x-3 text-slate-300 mb-2">
-            <i data-lucide="heart" class="w-4 h-4 text-red-500 fill-red-500"></i>
-            <i data-lucide="message-circle" class="w-4 h-4"></i>
-            <i data-lucide="send" class="w-4 h-4"></i>
-          </div>
-          <p class="text-slate-300 leading-relaxed">
-            <b class="text-white">vitbhopal.campus</b> Ganpati Bappa Morya! 🙏 Grand celebration and Maha Aarti of Lord Ganesha on campus.
-          </p>
-          <span class="text-[11px] text-orange-400 mt-1 block">#GaneshChaturthi #VITBhopal #CampusUtsav</span>
-        </div>
-      </div>
-
-      <!-- Post 2: Ganesh Chaturthi 2 -->
-      <div class="media-item bg-slate-900/90 rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between"
-           data-category="festivals" data-type="image" data-title="Ganesh Sthapana Rituals" data-desc="Vedic rituals and student cultural aarti chanting">
-        <div class="p-3.5 flex items-center justify-between border-b border-slate-800/60">
-          <div class="flex items-center space-x-2.5">
-            <div class="w-7 h-7 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold text-xs">🦁</div>
-            <div>
-              <div class="text-xs font-bold text-white">vitbhopal.campus</div>
-              <div class="text-[10px] text-slate-400">Main Mandap</div>
-            </div>
-          </div>
-          <span class="text-[10px] text-orange-400 font-semibold px-2 py-0.5 rounded bg-orange-500/10">Festival</span>
-        </div>
-        <div class="h-64 bg-black overflow-hidden cursor-pointer">
-          <img src="assets/images/festivals/ganesh-chaturthi-2.jpg" alt="Ganesh Sthapana" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
-        </div>
-        <div class="p-4 text-xs">
-          <div class="flex items-center space-x-3 text-slate-300 mb-2">
-            <i data-lucide="heart" class="w-4 h-4 text-red-500 fill-red-500"></i>
-            <i data-lucide="message-circle" class="w-4 h-4"></i>
-            <i data-lucide="send" class="w-4 h-4"></i>
-          </div>
-          <p class="text-slate-300 leading-relaxed">
-            <b class="text-white">vitbhopal.campus</b> Divine moments from the annual Ganesh Sthapana rituals organized by students.
-          </p>
-          <span class="text-[11px] text-orange-400 mt-1 block">#BappaInCampus #CulturalUnity #VITB</span>
-        </div>
-      </div>
-
-      <!-- Post 3: Ganesh Utsav Dhol Tasha -->
-      <div class="media-item bg-slate-900/90 rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between"
-           data-category="festivals" data-type="image" data-title="Ganesh Utsav Dhol Tasha" data-desc="High-energy Dhol Tasha beats and cultural celebration">
-        <div class="p-3.5 flex items-center justify-between border-b border-slate-800/60">
-          <div class="flex items-center space-x-2.5">
-            <div class="w-7 h-7 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold text-xs">🦁</div>
-            <div>
-              <div class="text-xs font-bold text-white">vitbhopal.campus</div>
-              <div class="text-[10px] text-slate-400">Campus Promenade</div>
-            </div>
-          </div>
-          <span class="text-[10px] text-orange-400 font-semibold px-2 py-0.5 rounded bg-orange-500/10">Festival</span>
-        </div>
-        <div class="h-64 bg-black overflow-hidden cursor-pointer">
-          <img src="assets/images/festivals/ganesh-utsav.jpg" alt="Ganesh Utsav" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
-        </div>
-        <div class="p-4 text-xs">
-          <div class="flex items-center space-x-3 text-slate-300 mb-2">
-            <i data-lucide="heart" class="w-4 h-4 text-red-500 fill-red-500"></i>
-            <i data-lucide="message-circle" class="w-4 h-4"></i>
-            <i data-lucide="send" class="w-4 h-4"></i>
-          </div>
-          <p class="text-slate-300 leading-relaxed">
-            <b class="text-white">vitbhopal.campus</b> Dhol Tasha beats echoing through the hostel quadrangle! The energy was unmatched. 🥁
-          </p>
-          <span class="text-[11px] text-orange-400 mt-1 block">#DholTasha #GaneshVisarjan #FestiveVibes</span>
-        </div>
-      </div>
-
-      <!-- Post 4: Rangotsav Holi -->
-      <div class="media-item bg-slate-900/90 rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between"
-           data-category="festivals" data-type="image" data-title="Rangotsav — Holi Celebration" data-desc="Organic colors and festive celebration across campus grounds">
-        <div class="p-3.5 flex items-center justify-between border-b border-slate-800/60">
-          <div class="flex items-center space-x-2.5">
-            <div class="w-7 h-7 rounded-full bg-pink-500/20 text-pink-400 flex items-center justify-center font-bold text-xs">🎨</div>
-            <div>
-              <div class="text-xs font-bold text-white">vitbhopal.campus</div>
-              <div class="text-[10px] text-slate-400">Hostel Ground</div>
-            </div>
-          </div>
-          <span class="text-[10px] text-pink-400 font-semibold px-2 py-0.5 rounded bg-pink-500/10">Festival</span>
-        </div>
-        <div class="h-64 bg-black overflow-hidden cursor-pointer">
-          <img src="assets/images/festivals/rangotsav.jpg" alt="Rangotsav Holi" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
-        </div>
-        <div class="p-4 text-xs">
-          <div class="flex items-center space-x-3 text-slate-300 mb-2">
-            <i data-lucide="heart" class="w-4 h-4 text-red-500 fill-red-500"></i>
-            <i data-lucide="message-circle" class="w-4 h-4"></i>
-            <i data-lucide="send" class="w-4 h-4"></i>
-          </div>
-          <p class="text-slate-300 leading-relaxed">
-            <b class="text-white">vitbhopal.campus</b> Colors, joy, and togetherness at Rangotsav! Happy Holi to the entire VIT Bhopal family! 🌈
-          </p>
-          <span class="text-[11px] text-pink-400 mt-1 block">#HoliAtVITB #Rangotsav #ColorsOfJoy</span>
-        </div>
-      </div>
-
-      <!-- Post 5: Advitiya Tech Fest -->
-      <div class="media-item bg-slate-900/90 rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between"
-           data-category="events" data-type="image" data-title="Advitiya Annual Tech Fest" data-desc="Flagship techno-cultural conclave with robotics and coding competitions">
-        <div class="p-3.5 flex items-center justify-between border-b border-slate-800/60">
-          <div class="flex items-center space-x-2.5">
-            <div class="w-7 h-7 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-xs">⚡</div>
-            <div>
-              <div class="text-xs font-bold text-white">vitbhopal.campus</div>
-              <div class="text-[10px] text-slate-400">Auditorium Complex</div>
-            </div>
-          </div>
-          <span class="text-[10px] text-cyan-400 font-semibold px-2 py-0.5 rounded bg-cyan-500/10">Tech Fest</span>
-        </div>
-        <div class="h-64 bg-black overflow-hidden cursor-pointer">
-          <img src="assets/images/events/advitya-fest.jpg" alt="Advitiya Fest" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
-        </div>
-        <div class="p-4 text-xs">
-          <div class="flex items-center space-x-3 text-slate-300 mb-2">
-            <i data-lucide="heart" class="w-4 h-4 text-red-500 fill-red-500"></i>
-            <i data-lucide="message-circle" class="w-4 h-4"></i>
-            <i data-lucide="send" class="w-4 h-4"></i>
-          </div>
-          <p class="text-slate-300 leading-relaxed">
-            <b class="text-white">vitbhopal.campus</b> Advitiya Annual Tech Fest inauguration! 3 days of hackathons, robotics, and innovation. 🚀
-          </p>
-          <span class="text-[11px] text-cyan-400 mt-1 block">#Advitiya #TechFest #InnovationHub</span>
-        </div>
-      </div>
-
-      <!-- Post 6: Convocation Ceremony -->
-      <div class="media-item bg-slate-900/90 rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between"
-           data-category="events" data-type="image" data-title="Annual Convocation Ceremony" data-desc="Graduating engineers receiving degrees and milestone awards">
-        <div class="p-3.5 flex items-center justify-between border-b border-slate-800/60">
-          <div class="flex items-center space-x-2.5">
-            <div class="w-7 h-7 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">🎓</div>
-            <div>
-              <div class="text-xs font-bold text-white">vitbhopal.campus</div>
-              <div class="text-[10px] text-slate-400">Convocation Hall</div>
-            </div>
-          </div>
-          <span class="text-[10px] text-emerald-400 font-semibold px-2 py-0.5 rounded bg-emerald-500/10">Academic</span>
-        </div>
-        <div class="h-64 bg-black overflow-hidden cursor-pointer">
-          <img src="assets/images/events/convocation-day.jpg" alt="Convocation Day" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
-        </div>
-        <div class="p-4 text-xs">
-          <div class="flex items-center space-x-3 text-slate-300 mb-2">
-            <i data-lucide="heart" class="w-4 h-4 text-red-500 fill-red-500"></i>
-            <i data-lucide="message-circle" class="w-4 h-4"></i>
-            <i data-lucide="send" class="w-4 h-4"></i>
-          </div>
-          <p class="text-slate-300 leading-relaxed">
-            <b class="text-white">vitbhopal.campus</b> Celebrating the graduation of our brilliant engineering batch! Onwards and upwards! 🎓
-          </p>
-          <span class="text-[11px] text-emerald-400 mt-1 block">#ConvocationDay #Graduation #LionsOfVIT</span>
-        </div>
-      </div>
-
-      <!-- Post 7: Rajasthan Tour -->
-      <div class="media-item bg-slate-900/90 rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between"
-           data-category="events" data-type="image" data-title="Rajasthan Cultural Expedition" data-desc="Student educational tour and heritage exploration">
-        <div class="p-3.5 flex items-center justify-between border-b border-slate-800/60">
-          <div class="flex items-center space-x-2.5">
-            <div class="w-7 h-7 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-xs">🗺️</div>
-            <div>
-              <div class="text-xs font-bold text-white">vitbhopal.campus</div>
-              <div class="text-[10px] text-slate-400">Heritage Expedition</div>
-            </div>
-          </div>
-          <span class="text-[10px] text-amber-400 font-semibold px-2 py-0.5 rounded bg-amber-500/10">Tour</span>
-        </div>
-        <div class="h-64 bg-black overflow-hidden cursor-pointer">
-          <img src="assets/images/events/rajasthan-cultural-tour.jpg" alt="Rajasthan Tour" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
-        </div>
-        <div class="p-4 text-xs">
-          <div class="flex items-center space-x-3 text-slate-300 mb-2">
-            <i data-lucide="heart" class="w-4 h-4 text-red-500 fill-red-500"></i>
-            <i data-lucide="message-circle" class="w-4 h-4"></i>
-            <i data-lucide="send" class="w-4 h-4"></i>
-          </div>
-          <p class="text-slate-300 leading-relaxed">
-            <b class="text-white">vitbhopal.campus</b> Exploring Rajasthan heritage with batchmates. Memories for a lifetime! ✨
-          </p>
-          <span class="text-[11px] text-amber-400 mt-1 block">#CampusTour #RajasthanDiaries #StudentLife</span>
-        </div>
-      </div>
-
-      <!-- Post 8: Video: Holi Celebration -->
-      <div class="media-item bg-slate-900/90 rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between"
-           data-category="videos" data-type="video" data-title="Holi Celebration Video Reel" data-desc="Real campus video recap of Holi festival celebrations">
-        <div class="p-3.5 flex items-center justify-between border-b border-slate-800/60">
-          <div class="flex items-center space-x-2.5">
-            <div class="w-7 h-7 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-xs">🎥</div>
-            <div>
-              <div class="text-xs font-bold text-white">vitbhopal.campus</div>
-              <div class="text-[10px] text-slate-400">Campus Video Reel</div>
-            </div>
-          </div>
-          <span class="text-[10px] text-red-400 font-semibold px-2 py-0.5 rounded bg-red-500/10">Video Reel</span>
-        </div>
-        <div class="h-64 bg-black overflow-hidden flex items-center justify-center">
-          <video src="assets/videos/holi-celebration.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
-        </div>
-        <div class="p-4 text-xs">
-          <p class="text-slate-300 leading-relaxed">
-            <b class="text-white">vitbhopal.campus</b> Watch the colors and laughter! Holi fest video reel. 📹
-          </p>
-          <span class="text-[11px] text-red-400 mt-1 block">#HoliReels #CampusVibes</span>
-        </div>
-      </div>
-
-      <!-- Post 9: Video: Garba Night -->
-      <div class="media-item bg-slate-900/90 rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between"
-           data-category="videos" data-type="video" data-title="Garba & Dandiya Night" data-desc="Navratri garba night beats and traditional dance">
-        <div class="p-3.5 flex items-center justify-between border-b border-slate-800/60">
-          <div class="flex items-center space-x-2.5">
-            <div class="w-7 h-7 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-xs">🎥</div>
-            <div>
-              <div class="text-xs font-bold text-white">vitbhopal.campus</div>
-              <div class="text-[10px] text-slate-400">Navratri Ground</div>
-            </div>
-          </div>
-          <span class="text-[10px] text-red-400 font-semibold px-2 py-0.5 rounded bg-red-500/10">Video Reel</span>
-        </div>
-        <div class="h-64 bg-black overflow-hidden flex items-center justify-center">
-          <video src="assets/videos/garba-night.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
-        </div>
-        <div class="p-4 text-xs">
-          <p class="text-slate-300 leading-relaxed">
-            <b class="text-white">vitbhopal.campus</b> Traditional Garba & Dandiya Raas on the lawn under the stars! 🪔
-          </p>
-          <span class="text-[11px] text-red-400 mt-1 block">#GarbaNight #Navratri #VITBhopal</span>
-        </div>
-      </div>
-
-      <!-- Post 10: Video: Music Concert -->
-      <div class="media-item bg-slate-900/90 rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between"
-           data-category="videos" data-type="video" data-title="Live Music Concert" data-desc="Campus band and student acoustic live performance">
-        <div class="p-3.5 flex items-center justify-between border-b border-slate-800/60">
-          <div class="flex items-center space-x-2.5">
-            <div class="w-7 h-7 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-xs">🎥</div>
-            <div>
-              <div class="text-xs font-bold text-white">vitbhopal.campus</div>
-              <div class="text-[10px] text-slate-400">Open Air Amphitheatre</div>
-            </div>
-          </div>
-          <span class="text-[10px] text-red-400 font-semibold px-2 py-0.5 rounded bg-red-500/10">Video Reel</span>
-        </div>
-        <div class="h-64 bg-black overflow-hidden flex items-center justify-center">
-          <video src="assets/videos/music-concert.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
-        </div>
-        <div class="p-4 text-xs">
-          <p class="text-slate-300 leading-relaxed">
-            <b class="text-white">vitbhopal.campus</b> Student acoustic band performing live during cultural evening! 🎸
-          </p>
-          <span class="text-[11px] text-red-400 mt-1 block">#MusicClub #LiveConcert #CampusBand</span>
-        </div>
-      </div>
-
-      <!-- Post 11: Video: Convocation Ceremony -->
-      <div class="media-item bg-slate-900/90 rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between"
-           data-category="videos" data-type="video" data-title="Convocation Day Video Reel" data-desc="Graduation cap toss and speech highlights">
-        <div class="p-3.5 flex items-center justify-between border-b border-slate-800/60">
-          <div class="flex items-center space-x-2.5">
-            <div class="w-7 h-7 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-xs">🎥</div>
-            <div>
-              <div class="text-xs font-bold text-white">vitbhopal.campus</div>
-              <div class="text-[10px] text-slate-400">Auditorium</div>
-            </div>
-          </div>
-          <span class="text-[10px] text-red-400 font-semibold px-2 py-0.5 rounded bg-red-500/10">Video Reel</span>
-        </div>
-        <div class="h-64 bg-black overflow-hidden flex items-center justify-center">
-          <video src="assets/videos/convocation-ceremony.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
-        </div>
-        <div class="p-4 text-xs">
-          <p class="text-slate-300 leading-relaxed">
-            <b class="text-white">vitbhopal.campus</b> Highlights from the grand Convocation Day ceremony. 🎓
-          </p>
-          <span class="text-[11px] text-red-400 mt-1 block">#Graduation2026 #VITBConvocation</span>
-        </div>
-      </div>
-
-      <!-- Post 12: Video: Personality Development -->
-      <div class="media-item bg-slate-900/90 rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between"
-           data-category="videos" data-type="video" data-title="Student Workshop & Leadership" data-desc="Interactive seminar on professional growth and skill building">
-        <div class="p-3.5 flex items-center justify-between border-b border-slate-800/60">
-          <div class="flex items-center space-x-2.5">
-            <div class="w-7 h-7 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-xs">🎥</div>
-            <div>
-              <div class="text-xs font-bold text-white">vitbhopal.campus</div>
-              <div class="text-[10px] text-slate-400">Seminar Hall</div>
-            </div>
-          </div>
-          <span class="text-[10px] text-red-400 font-semibold px-2 py-0.5 rounded bg-red-500/10">Video Reel</span>
-        </div>
-        <div class="h-64 bg-black overflow-hidden flex items-center justify-center">
-          <video src="assets/videos/personality-development.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
-        </div>
-        <div class="p-4 text-xs">
-          <p class="text-slate-300 leading-relaxed">
-            <b class="text-white">vitbhopal.campus</b> Leadership & Skill Development session for first-year engineering students. 💡
-          </p>
-          <span class="text-[11px] text-red-400 mt-1 block">#StudentLeadership #Workshop #CareerGrowth</span>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Empty State -->
-    <div id="empty-state" class="hidden text-center py-16">
-      <p class="text-slate-400 text-sm">No matching posts found.</p>
-    </div>
-  </main>
 
   <!-- ================= LIGHTBOX MODAL ================= -->
-  <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4">
-    <button id="lightbox-close" class="absolute top-6 right-6 p-2.5 rounded-full bg-slate-900 text-white hover:bg-slate-800 z-50">
-      <i data-lucide="x" class="w-5 h-5"></i>
+  <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4" onclick="closeLightbox()">
+    <button class="absolute top-6 right-6 p-3 rounded-full bg-white/20 text-white hover:bg-white/30 z-50" onclick="closeLightbox()">
+      <i data-lucide="x" class="w-6 h-6"></i>
     </button>
-    <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-slate-900 text-white hover:bg-slate-800 z-50">
-      <i data-lucide="chevron-left" class="w-5 h-5"></i>
-    </button>
-    <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-slate-900 text-white hover:bg-slate-800 z-50">
-      <i data-lucide="chevron-right" class="w-5 h-5"></i>
-    </button>
-
-    <div class="max-w-3xl w-full flex flex-col items-center">
-      <img id="lightbox-image" src="" alt="Preview" class="max-h-[75vh] w-auto rounded-xl object-contain">
-      <div class="mt-3 text-center">
-        <h3 id="lightbox-title" class="text-base font-bold text-white"></h3>
-        <p id="lightbox-date" class="text-slate-400 text-xs mt-0.5"></p>
+    <div class="max-w-4xl w-full flex flex-col items-center" onclick="event.stopPropagation()">
+      <img id="lightbox-img" src="" alt="Preview" class="max-h-[75vh] w-auto rounded-2xl shadow-2xl object-contain border border-white/20">
+      <div class="mt-4 text-center">
+        <h3 id="lightbox-title" class="text-xl font-bold text-white"></h3>
+        <p id="lightbox-desc" class="text-white/80 text-xs mt-1"></p>
       </div>
     </div>
   </div>
 
   <!-- ================= FOOTER ================= -->
-  <footer class="bg-slate-950 py-8 border-t border-slate-800/80 text-center text-xs text-slate-500">
-    <p class="text-slate-400 font-medium">&copy; 2026 NewsVita • VIT Bhopal University. Developed by <b>Apoorv</b> (@code-with-apoorv).</p>
+  <footer class="mt-auto py-8 text-center text-xs text-white/80 border-t border-white/20">
+    <p>&copy; 2026 NewsVita • <b>VIT Bhopal University</b>. Developed by <b>Apoorv</b> (@code-with-apoorv).</p>
   </footer>
 
-  <script src="js/app.js"></script>
-  <script>lucide.createIcons();</script>
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <script>
+    const onchangeView = (view) => {
+      const video = document.getElementById("videos");
+      const image = document.getElementById("photos");
+      const btnPhotos = document.getElementById("btn-photos");
+      const btnVideos = document.getElementById("btn-videos");
+      
+      if (view === "image") {
+        video.style.display = "none";
+        image.style.display = "block";
+        btnPhotos.classList.add("active");
+        btnVideos.classList.remove("active");
+      } else {
+        video.style.display = "block";
+        image.style.display = "none";
+        btnVideos.classList.add("active");
+        btnPhotos.classList.remove("active");
+      }
+    };
+
+    const openLightbox = (src, title, desc) => {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-title').innerText = title;
+      document.getElementById('lightbox-desc').innerText = desc;
+      const modal = document.getElementById('lightbox-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    };
+
+    const closeLightbox = () => {
+      const modal = document.getElementById('lightbox-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    };
+
+    // Initialize Lucide Icons
+    lucide.createIcons();
+  </script>
+
 </body>
 </html>
