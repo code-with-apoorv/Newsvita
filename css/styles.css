@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    NewsVita — Campus Media & Event Intelligence Portal
    Styles: CSS Modern Reset, Custom Utilities, Animations, and Modal Lightbox
    ========================================================================== */
@@ -131,27 +131,3 @@ html {
 .pulse-indicator {
   animation: pulseGlow 2s infinite ease-in-out;
 }
-
-/* Marquee Breaking Ticker */
-@keyframes marquee {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-.animate-marquee {
-  display: inline-block;
-  white-space: nowrap;
-  animation: marquee 25s linear infinite;
-}
-.animate-marquee:hover {
-  animation-play-state: paused;
-}
-
-/* Hide scrollbar for stories */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-

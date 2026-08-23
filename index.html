@@ -3,333 +3,696 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NewsVita — Past Events & Campus Highlights | VIT Bhopal University</title>
-  <meta name="description" content="Official campus media and past events gallery of VIT Bhopal University. Featuring Ganesh Utsav, Advitiya Tech Fest, Rangotsav, and Convocation Day.">
+  <title>NewsVita — Campus Media & Event Intelligence Portal</title>
+  <meta name="description" content="Centralized multimedia news and event showcase portal for university festivals, convocation ceremonies, cultural fests, and student activities.">
   
-  <!-- Tailwind CSS CDN -->
+  <!-- Tailwind CSS CDN with Official Plugins -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Google Fonts (Poppins & Plus Jakarta Sans) -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fff7ed',
+              100: '#ffedd5',
+              500: '#f97316',
+              600: '#ea580c',
+              700: '#c2410c',
+            },
+            accent: {
+              500: '#ec4899',
+              600: '#db2777',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            heading: ['Poppins', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: 'Poppins', 'Plus Jakarta Sans', sans-serif;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #fc9840 0%, #fe5f75 100%);
-      background-attachment: fixed;
-      color: #ffffff;
-    }
-    .glass-nav {
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    .glass-card {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-    }
-    .photo-card {
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .photo-card:hover {
-      transform: translateY(-6px) scale(1.02);
-      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.25);
-    }
-    .photo-card img {
-      transition: transform 0.5s ease;
-    }
-    .photo-card:hover img {
-      transform: scale(1.06);
-    }
-    .toggle-btn.active {
-      background: #ffffff !important;
-      color: #fe5f75 !important;
-      font-weight: 700;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
-    }
-  </style>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📸</text></svg>">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📰</text></svg>">
 </head>
-<body class="flex flex-col min-h-screen">
+<body class="bg-[#0B0F17] text-slate-100 min-h-screen flex flex-col antialiased selection:bg-orange-500 selection:text-white">
 
   <!-- ================= NAVBAR ================= -->
-  <nav class="sticky top-0 z-40 glass-nav px-4 sm:px-8 py-4 flex justify-between items-center">
-    
-    <!-- Brand Logo -->
-    <a href="#" class="flex items-center space-x-2.5 text-white no-underline group">
-      <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform">
-        <span class="text-xl">🦁</span>
-      </div>
-      <div>
-        <h1 class="text-xl sm:text-2xl font-black tracking-tight text-white leading-none">News<span class="text-yellow-200">Vita</span></h1>
-        <p class="text-[10px] text-white/80 font-medium">VIT Bhopal University</p>
-      </div>
-    </a>
-
-    <!-- Nav Links & Toggle -->
-    <div class="flex items-center space-x-3 sm:space-x-6 text-sm font-semibold">
-      <button onclick="onchangeView('image')" class="hover:text-yellow-200 cursor-pointer transition-colors flex items-center gap-1.5">
-        <i data-lucide="image" class="w-4 h-4"></i>
-        <span>Photos</span>
-      </button>
-      <button onclick="onchangeView('video')" class="hover:text-yellow-200 cursor-pointer transition-colors flex items-center gap-1.5">
-        <i data-lucide="play-circle" class="w-4 h-4"></i>
-        <span>Videos</span>
-      </button>
-      <a href="https://www.instagram.com/vit.bhopal" target="_blank" class="hidden sm:flex items-center space-x-1.5 px-3.5 py-1.5 rounded-full bg-white/20 hover:bg-white/30 text-white transition-all text-xs font-bold border border-white/30">
-        <i data-lucide="instagram" class="w-3.5 h-3.5"></i>
-        <span>@vit.bhopal</span>
+  <header class="sticky top-0 z-40 glass-nav">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#home" class="flex items-center space-x-3 group">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-orange-500 via-pink-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-orange-500/20 group-hover:scale-105 transition-transform">
+          <i data-lucide="newspaper" class="w-6 h-6 text-white"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xl font-bold tracking-tight text-white font-heading">News<span class="bg-gradient-to-r from-orange-400 to-pink-500 bg-clip-text text-transparent">Vita</span></span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-orange-500/10 text-orange-400 font-semibold border border-orange-500/20">Campus Pulse</span>
+          </div>
+          <p class="text-[11px] text-slate-400">Media & Event Intelligence Hub</p>
+        </div>
       </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 bg-slate-900/60 p-1.5 rounded-2xl border border-slate-800">
+        <a href="#home" class="px-4 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all">Home</a>
+        <a href="#featured" class="px-4 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all">Highlights</a>
+        <a href="#gallery-section" class="px-4 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all">Media Archive</a>
+        <a href="#events" class="px-4 py-2 text-xs font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all">Upcoming Fests</a>
+      </nav>
+
+      <!-- Right Action CTA -->
+      <div class="hidden sm:flex items-center space-x-3">
+        <a href="#gallery-section" class="inline-flex items-center space-x-2 px-4 py-2.5 rounded-xl text-xs font-semibold text-white bg-gradient-to-r from-orange-500 to-pink-600 hover:from-orange-600 hover:to-pink-700 shadow-lg shadow-orange-500/25 transition-all">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+          <span>Explore Gallery</span>
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobile-menu-btn" class="md:hidden p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
     </div>
 
-  </nav>
-
-  <!-- ================= HEADER SECTION ================= -->
-  <header class="text-center px-4 pt-10 pb-6 max-w-4xl mx-auto">
-    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/20 border border-white/30 text-xs text-white font-semibold mb-3">
-      <span>🏛️</span>
-      <span>Official Campus Gallery & Media Archive</span>
-    </div>
-    <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-white drop-shadow-sm">
-      Past Events Gallery
-    </h2>
-    <p class="mt-3 text-sm sm:text-base text-white/90 max-w-xl mx-auto font-medium">
-      Relive the most memorable moments from Ganesh Chaturthi, Advitiya Tech Fest, Rangotsav Holi, and Annual Convocation Day.
-    </p>
-
-    <!-- View Switcher Tabs -->
-    <div class="justify-center flex gap-3 mt-8">
-      <button id="btn-photos" class="toggle-btn active bg-white/20 hover:bg-white/30 text-white px-6 py-2.5 rounded-full text-sm font-bold border border-white/30 transition-all flex items-center gap-2"
-              onclick="onchangeView('image')">
-        <i data-lucide="images" class="w-4 h-4"></i>
-        <span>Photos (6)</span>
-      </button>
-      <button id="btn-videos" class="toggle-btn bg-white/20 hover:bg-white/30 text-white px-6 py-2.5 rounded-full text-sm font-bold border border-white/30 transition-all flex items-center gap-2"
-              onclick="onchangeView('video')">
-        <i data-lucide="video" class="w-4 h-4"></i>
-        <span>Videos (5)</span>
-      </button>
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-6 space-y-2 bg-slate-950/95 border-b border-slate-800 backdrop-blur-xl">
+      <a href="#home" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800">Home</a>
+      <a href="#featured" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800">Highlights</a>
+      <a href="#gallery-section" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800">Media Archive</a>
+      <a href="#events" class="block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-300 hover:bg-slate-800">Upcoming Fests</a>
     </div>
   </header>
 
-  <!-- ================= PHOTOS GALLERY ================= -->
-  <section class="max-w-6xl mx-auto px-4 pb-16 w-full" id="photos">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+  <!-- ================= HERO SECTION ================= -->
+  <section id="home" class="relative pt-12 pb-20 overflow-hidden">
+    <!-- Ambient Gradient Blobs -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-orange-600/20 via-pink-600/20 to-purple-600/20 blur-[130px] -z-10 pointer-events-none rounded-full"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       
-      <!-- Card 1: Ganesh Chaturthi 1 -->
-      <div class="glass-card rounded-2xl overflow-hidden shadow-lg photo-card flex flex-col justify-between" onclick="openLightbox('IMG 1.jpg', 'Ganesh Chaturthi Sthapana', 'Lord Ganesha Sthapana & Cultural Puja')">
-        <div class="h-64 overflow-hidden cursor-pointer bg-black/20">
-          <img src="IMG 1.jpg" alt="Ganesh Chaturthi Celebration" class="w-full h-full object-cover">
-        </div>
-        <div class="p-4 bg-white/10 border-t border-white/15 text-left">
-          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-yellow-400 text-slate-900">Festival</span>
-          <h3 class="text-base font-bold text-white mt-1.5">Ganesh Chaturthi Celebration</h3>
-          <p class="text-xs text-white/80 mt-1">Lord Ganesha Sthapana & traditional aarti chanting on campus.</p>
-        </div>
+      <!-- Live Badge -->
+      <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 text-xs text-slate-300 mb-6 shadow-inner">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-indicator"></span>
+        <span class="font-medium">University Cultural & Academic Media Archive</span>
       </div>
 
-      <!-- Card 2: Advitiya Fest -->
-      <div class="glass-card rounded-2xl overflow-hidden shadow-lg photo-card flex flex-col justify-between" onclick="openLightbox('advitya.jpg', 'Advitiya Annual Tech Fest', 'Robotics, Hackathons & Coding Arenas')">
-        <div class="h-64 overflow-hidden cursor-pointer bg-black/20">
-          <img src="advitya.jpg" alt="Advitiya Tech Fest" class="w-full h-full object-cover">
-        </div>
-        <div class="p-4 bg-white/10 border-t border-white/15 text-left">
-          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-cyan-300 text-slate-900">Tech Fest</span>
-          <h3 class="text-base font-bold text-white mt-1.5">Advitiya '26 Tech Conclave</h3>
-          <p class="text-xs text-white/80 mt-1">Central India's flagship techno-cultural fest & hackathon.</p>
-        </div>
+      <!-- Main Headline -->
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white font-heading max-w-4xl mx-auto leading-[1.15]">
+        Capturing Every Campus Beat, <br>
+        <span class="bg-gradient-to-r from-orange-400 via-pink-500 to-purple-400 bg-clip-text text-transparent">Festival & Milestone</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="mt-6 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+        NewsVita provides a centralized, interactive media showcase for student festivals, cultural nights, convocation ceremonies, and campus life stories.
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <a href="#gallery-section" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 text-white font-semibold text-sm shadow-xl shadow-orange-500/20 hover:scale-105 transition-all flex items-center space-x-2">
+          <i data-lucide="image" class="w-4 h-4"></i>
+          <span>View Photo Stories</span>
+        </a>
+        <a href="#gallery-section" onclick="setTimeout(() => document.querySelector('[data-filter=\'videos\']').click(), 100)" class="px-6 py-3.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700/80 font-semibold text-sm hover:scale-105 transition-all flex items-center space-x-2">
+          <i data-lucide="play-circle" class="w-4 h-4 text-pink-400"></i>
+          <span>Watch Video Highlights</span>
+        </a>
       </div>
 
-      <!-- Card 3: Ganesh Utsav / Ganeshaya -->
-      <div class="glass-card rounded-2xl overflow-hidden shadow-lg photo-card flex flex-col justify-between" onclick="openLightbox('ganeshaya.jpg', 'Ganesh Utsav Dhol Tasha', 'High-energy festive celebration on campus')">
-        <div class="h-64 overflow-hidden cursor-pointer bg-black/20">
-          <img src="ganeshaya.jpg" alt="Ganesh Utsav Dhol Tasha" class="w-full h-full object-cover">
+      <!-- Quick Metrics Bar -->
+      <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+        <div class="glass-card p-5 rounded-2xl text-center">
+          <div class="text-2xl lg:text-3xl font-extrabold text-white font-heading">15+</div>
+          <div class="text-xs text-slate-400 mt-1 font-medium">Annual Campus Fests</div>
         </div>
-        <div class="p-4 bg-white/10 border-t border-white/15 text-left">
-          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-yellow-400 text-slate-900">Festival</span>
-          <h3 class="text-base font-bold text-white mt-1.5">Ganesh Utsav Dhol Tasha</h3>
-          <p class="text-xs text-white/80 mt-1">Rhythmic beats, festive colors, and grand campus procession.</p>
+        <div class="glass-card p-5 rounded-2xl text-center">
+          <div class="text-2xl lg:text-3xl font-extrabold text-white font-heading">100%</div>
+          <div class="text-xs text-slate-400 mt-1 font-medium">Student & Club Powered</div>
         </div>
-      </div>
-
-      <!-- Card 4: Rajasthan Tour -->
-      <div class="glass-card rounded-2xl overflow-hidden shadow-lg photo-card flex flex-col justify-between" onclick="openLightbox('rajasthan.jpg', 'Rajasthan Cultural Tour', 'Student heritage and cultural expedition')">
-        <div class="h-64 overflow-hidden cursor-pointer bg-black/20">
-          <img src="rajasthan.jpg" alt="Rajasthan Tour" class="w-full h-full object-cover">
+        <div class="glass-card p-5 rounded-2xl text-center">
+          <div class="text-2xl lg:text-3xl font-extrabold text-white font-heading">4K</div>
+          <div class="text-xs text-slate-400 mt-1 font-medium">Event Highlight Reels</div>
         </div>
-        <div class="p-4 bg-white/10 border-t border-white/15 text-left">
-          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-300 text-slate-900">Tour</span>
-          <h3 class="text-base font-bold text-white mt-1.5">Rajasthan Cultural Tour</h3>
-          <p class="text-xs text-white/80 mt-1">Student exploration of royal heritage and historical landmarks.</p>
-        </div>
-      </div>
-
-      <!-- Card 5: Rangotsav Holi -->
-      <div class="glass-card rounded-2xl overflow-hidden shadow-lg photo-card flex flex-col justify-between" onclick="openLightbox('rangotsav.jpg', 'Rangotsav Holi Celebration', 'Vibrant colors of joy and student unity')">
-        <div class="h-64 overflow-hidden cursor-pointer bg-black/20">
-          <img src="rangotsav.jpg" alt="Rangotsav Holi" class="w-full h-full object-cover">
-        </div>
-        <div class="p-4 bg-white/10 border-t border-white/15 text-left">
-          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-pink-300 text-slate-900">Festival</span>
-          <h3 class="text-base font-bold text-white mt-1.5">Rangotsav — Campus Holi</h3>
-          <p class="text-xs text-white/80 mt-1">Organic gulal, music, and festive celebrations on the lawn.</p>
-        </div>
-      </div>
-
-      <!-- Card 6: Convocation Day -->
-      <div class="glass-card rounded-2xl overflow-hidden shadow-lg photo-card flex flex-col justify-between" onclick="openLightbox('convocation.jpg', 'Annual Convocation Day', 'Celebrating the graduation of engineering batch')">
-        <div class="h-64 overflow-hidden cursor-pointer bg-black/20">
-          <img src="convocation.jpg" alt="Convocation Day" class="w-full h-full object-cover">
-        </div>
-        <div class="p-4 bg-white/10 border-t border-white/15 text-left">
-          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-300 text-slate-900">Academic</span>
-          <h3 class="text-base font-bold text-white mt-1.5">Annual Convocation Ceremony</h3>
-          <p class="text-xs text-white/80 mt-1">Graduating engineers receiving their academic degrees.</p>
+        <div class="glass-card p-5 rounded-2xl text-center">
+          <div class="text-2xl lg:text-3xl font-extrabold text-white font-heading">5,000+</div>
+          <div class="text-xs text-slate-400 mt-1 font-medium">Student Participants</div>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- ================= VIDEOS GALLERY ================= -->
-  <section class="max-w-6xl mx-auto px-4 pb-16 w-full" style="display: none;" id="videos">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+  <!-- ================= FEATURED STORIES ================= -->
+  <section id="featured" class="py-16 bg-slate-950/60 border-y border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <!-- Video 1: Holi Celebration -->
-      <div class="glass-card rounded-2xl overflow-hidden shadow-lg flex flex-col justify-between">
-        <div class="h-64 bg-black/40 flex items-center justify-center overflow-hidden">
-          <video src="Holi.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+        <div>
+          <span class="text-xs font-bold text-orange-400 tracking-wider uppercase">Editorial Picks</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white font-heading mt-1">Featured Campus Stories</h2>
         </div>
-        <div class="p-4 bg-white/10 border-t border-white/15">
-          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-pink-300 text-slate-900">Reel</span>
-          <h3 class="text-base font-bold text-white mt-1.5">Holi Celebration Highlights</h3>
-          <p class="text-xs text-white/80 mt-1">Festive campus colors and celebration video.</p>
-        </div>
+        <p class="text-xs sm:text-sm text-slate-400 mt-2 md:mt-0 max-w-md">
+          Curated top moments from recent cultural summits, traditional celebrations, and graduation ceremonies.
+        </p>
       </div>
 
-      <!-- Video 2: Garba Night -->
-      <div class="glass-card rounded-2xl overflow-hidden shadow-lg flex flex-col justify-between">
-        <div class="h-64 bg-black/40 flex items-center justify-center overflow-hidden">
-          <video src="Garba.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
+      <!-- Featured Story Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Story 1: Ganesh Chaturthi -->
+        <div class="glass-card rounded-3xl overflow-hidden group media-card flex flex-col">
+          <div class="relative h-52 overflow-hidden">
+            <img src="assets/images/festivals/ganesh-chaturthi-1.jpg" alt="Ganesh Chaturthi Celebration" class="w-full h-full object-cover">
+            <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-orange-500/90 text-white backdrop-blur-md">
+              Cultural Fest
+            </div>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="text-xs text-slate-400 flex items-center gap-2 mb-2">
+                <i data-lucide="calendar" class="w-3.5 h-3.5 text-orange-400"></i>
+                <span>Annual Campus Utsav</span>
+              </div>
+              <h3 class="text-lg font-bold text-white font-heading group-hover:text-orange-400 transition-colors">
+                Ganesh Chaturthi Maha Utsav: Campus Aarti & Cultural Procession
+              </h3>
+              <p class="text-xs text-slate-400 mt-2 line-clamp-2">
+                Over 2,000 students joined the ceremonial prayers, traditional dhol tasha, and campus eco-friendly immersion.
+              </p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-800/80 flex items-center justify-between">
+              <span class="text-xs text-slate-500">Photo Story</span>
+              <span class="text-xs font-semibold text-orange-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Read Story <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </span>
+            </div>
+          </div>
         </div>
-        <div class="p-4 bg-white/10 border-t border-white/15">
-          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-yellow-300 text-slate-900">Reel</span>
-          <h3 class="text-base font-bold text-white mt-1.5">Garba & Dandiya Night</h3>
-          <p class="text-xs text-white/80 mt-1">Navratri Dandiya Raas on the open lawn.</p>
+
+        <!-- Story 2: Convocation -->
+        <div class="glass-card rounded-3xl overflow-hidden group media-card flex flex-col">
+          <div class="relative h-52 overflow-hidden">
+            <img src="assets/images/events/convocation-day.jpg" alt="University Convocation Ceremony" class="w-full h-full object-cover">
+            <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-500/90 text-white backdrop-blur-md">
+              Academic Milestone
+            </div>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="text-xs text-slate-400 flex items-center gap-2 mb-2">
+                <i data-lucide="calendar" class="w-3.5 h-3.5 text-blue-400"></i>
+                <span>Annual Graduation</span>
+              </div>
+              <h3 class="text-lg font-bold text-white font-heading group-hover:text-blue-400 transition-colors">
+                Annual Convocation: Graduating Class Steps Into Tomorrow
+              </h3>
+              <p class="text-xs text-slate-400 mt-2 line-clamp-2">
+                Honoring outstanding academic excellence, medal winners, and inspiring keynote addresses from distinguished alumni.
+              </p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-800/80 flex items-center justify-between">
+              <span class="text-xs text-slate-500">Official Release</span>
+              <span class="text-xs font-semibold text-blue-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Read Story <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </span>
+            </div>
+          </div>
         </div>
+
+        <!-- Story 3: Advitya Fest -->
+        <div class="glass-card rounded-3xl overflow-hidden group media-card flex flex-col">
+          <div class="relative h-52 overflow-hidden">
+            <img src="assets/images/events/advitya-fest.jpg" alt="Advitya Cultural & Tech Fest" class="w-full h-full object-cover">
+            <div class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-pink-500/90 text-white backdrop-blur-md">
+              Flagship Fest
+            </div>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="text-xs text-slate-400 flex items-center gap-2 mb-2">
+                <i data-lucide="calendar" class="w-3.5 h-3.5 text-pink-400"></i>
+                <span>Inter-College Fest</span>
+              </div>
+              <h3 class="text-lg font-bold text-white font-heading group-hover:text-pink-400 transition-colors">
+                Advitya: 3 Days of High-Energy Music, Drama & Competitions
+              </h3>
+              <p class="text-xs text-slate-400 mt-2 line-clamp-2">
+                Teams from 30+ colleges competed in robotics, fashion shows, street plays, and dynamic music band battles.
+              </p>
+            </div>
+            <div class="mt-4 pt-4 border-t border-slate-800/80 flex items-center justify-between">
+              <span class="text-xs text-slate-500">Event Recap</span>
+              <span class="text-xs font-semibold text-pink-400 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Read Story <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <!-- Video 3: Convocation Ceremony -->
-      <div class="glass-card rounded-2xl overflow-hidden shadow-lg flex flex-col justify-between">
-        <div class="h-64 bg-black/40 flex items-center justify-center overflow-hidden">
-          <video src="convo.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
-        </div>
-        <div class="p-4 bg-white/10 border-t border-white/15">
-          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-300 text-slate-900">Reel</span>
-          <h3 class="text-base font-bold text-white mt-1.5">Convocation Day Ceremony</h3>
-          <p class="text-xs text-white/80 mt-1">Graduation speech & cap toss moments.</p>
-        </div>
+    </div>
+  </section>
+
+  <!-- ================= INTERACTIVE MEDIA ARCHIVE ================= -->
+  <section id="gallery-section" class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-bold text-pink-400 tracking-wider uppercase">Interactive Gallery</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white font-heading mt-2">
+          Campus Media & Video Archive
+        </h2>
+        <p class="text-sm text-slate-400 mt-3">
+          Explore high-definition photos and video reels from festivals, student conclaves, and official ceremonies.
+        </p>
       </div>
 
-      <!-- Video 4: Music Concert -->
-      <div class="glass-card rounded-2xl overflow-hidden shadow-lg flex flex-col justify-between">
-        <div class="h-64 bg-black/40 flex items-center justify-center overflow-hidden">
-          <video src="MC.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
+      <!-- Controls: Filter Pills & Search Bar -->
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-10 pb-6 border-b border-slate-800/80">
+        
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap items-center justify-center gap-2">
+          <button data-filter="all" class="filter-btn active px-4 py-2 rounded-xl text-xs font-bold transition-all border border-slate-700/80">
+            🌟 All Media
+          </button>
+          <button data-filter="festivals" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold text-slate-300 bg-slate-800/80 border border-slate-700/80 hover:bg-slate-700 transition-all">
+            🎨 Cultural Festivals
+          </button>
+          <button data-filter="events" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold text-slate-300 bg-slate-800/80 border border-slate-700/80 hover:bg-slate-700 transition-all">
+            🎓 Academic Events
+          </button>
+          <button data-filter="videos" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold text-slate-300 bg-slate-800/80 border border-slate-700/80 hover:bg-slate-700 transition-all">
+            🎬 Video Highlights
+          </button>
         </div>
-        <div class="p-4 bg-white/10 border-t border-white/15">
-          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-purple-300 text-slate-900">Reel</span>
-          <h3 class="text-base font-bold text-white mt-1.5">Live Music & Pro-Concert</h3>
-          <p class="text-xs text-white/80 mt-1">Student acoustic band live stage performance.</p>
+
+        <!-- Search Bar -->
+        <div class="relative w-full md:w-72">
+          <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+          <input 
+            type="text" 
+            id="search-input" 
+            placeholder="Search events, fests..." 
+            class="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-900/90 border border-slate-800 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all"
+          >
         </div>
+
       </div>
 
-      <!-- Video 5: Personality Development -->
-      <div class="glass-card rounded-2xl overflow-hidden shadow-lg flex flex-col justify-between">
-        <div class="h-64 bg-black/40 flex items-center justify-center overflow-hidden">
-          <video src="Pd.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
+      <!-- Empty Search State -->
+      <div id="empty-state" class="hidden text-center py-16">
+        <div class="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center mx-auto text-slate-500 mb-4">
+          <i data-lucide="image-off" class="w-8 h-8"></i>
         </div>
-        <div class="p-4 bg-white/10 border-t border-white/15">
-          <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-sky-300 text-slate-900">Reel</span>
-          <h3 class="text-base font-bold text-white mt-1.5">Personality Development Seminar</h3>
-          <p class="text-xs text-white/80 mt-1">Professional training & student workshop session.</p>
+        <h3 class="text-lg font-bold text-white font-heading">No Media Found</h3>
+        <p class="text-xs text-slate-400 mt-1">Try refining your search keyword or switching the category tab.</p>
+      </div>
+
+      <!-- Media Items Grid -->
+      <div id="media-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Image Item 1: Ganesh Chaturthi Aarti -->
+        <div class="media-item glass-card rounded-2xl overflow-hidden media-card" 
+             data-category="festivals" 
+             data-type="image" 
+             data-title="Ganesh Chaturthi Utsav — Day 1 Grand Aarti" 
+             data-desc="Campus community gathering for the auspicious inauguration of Lord Ganesha idol"
+             data-date="September 2024">
+          <div class="relative h-64 overflow-hidden image-preview-trigger cursor-pointer group">
+            <img src="assets/images/festivals/ganesh-chaturthi-1.jpg" alt="Ganesh Chaturthi Celebration" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/20 backdrop-blur-md text-white text-xs font-semibold">
+                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i> Click to Enlarge
+              </span>
+            </div>
+            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-orange-500/90 text-white">Festival</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm font-heading">Ganesh Chaturthi — Day 1 Grand Aarti</h4>
+            <p class="text-xs text-slate-400 mt-1">Auspicious campus sthapana & student traditional prayers.</p>
+          </div>
         </div>
+
+        <!-- Image Item 2: Ganesh Chaturthi Procession -->
+        <div class="media-item glass-card rounded-2xl overflow-hidden media-card" 
+             data-category="festivals" 
+             data-type="image" 
+             data-title="Ganesh Utsav — Dhol Tasha Procession" 
+             data-desc="High energy traditional drumming and cultural celebration"
+             data-date="September 2024">
+          <div class="relative h-64 overflow-hidden image-preview-trigger cursor-pointer group">
+            <img src="assets/images/festivals/ganesh-chaturthi-2.jpg" alt="Ganesh Chaturthi Procession" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/20 backdrop-blur-md text-white text-xs font-semibold">
+                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i> Click to Enlarge
+              </span>
+            </div>
+            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-orange-500/90 text-white">Festival</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm font-heading">Ganesh Utsav — Dhol Tasha Celebration</h4>
+            <p class="text-xs text-slate-400 mt-1">Students bringing energy and cultural spirit to campus.</p>
+          </div>
+        </div>
+
+        <!-- Image Item 3: Ganesh Maha Sthapana -->
+        <div class="media-item glass-card rounded-2xl overflow-hidden media-card" 
+             data-category="festivals" 
+             data-type="image" 
+             data-title="Ganesh Maha Sthapana & Darshan" 
+             data-desc="Campus mandap decoration and evening lighting"
+             data-date="September 2024">
+          <div class="relative h-64 overflow-hidden image-preview-trigger cursor-pointer group">
+            <img src="assets/images/festivals/ganesh-utsav.jpg" alt="Ganesh Sthapana" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/20 backdrop-blur-md text-white text-xs font-semibold">
+                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i> Click to Enlarge
+              </span>
+            </div>
+            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-orange-500/90 text-white">Festival</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm font-heading">Ganesh Maha Sthapana & Darshan</h4>
+            <p class="text-xs text-slate-400 mt-1">Campus mandap decorations and student volunteering.</p>
+          </div>
+        </div>
+
+        <!-- Image Item 4: Rangotsav & Holi -->
+        <div class="media-item glass-card rounded-2xl overflow-hidden media-card" 
+             data-category="festivals" 
+             data-type="image" 
+             data-title="Rangotsav — Festival of Colors & Joy" 
+             data-desc="Annual campus organic Holi celebration with music and dance"
+             data-date="March 2024">
+          <div class="relative h-64 overflow-hidden image-preview-trigger cursor-pointer group">
+            <img src="assets/images/festivals/rangotsav.jpg" alt="Rangotsav Holi Celebration" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/20 backdrop-blur-md text-white text-xs font-semibold">
+                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i> Click to Enlarge
+              </span>
+            </div>
+            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-pink-500/90 text-white">Rangotsav</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm font-heading">Rangotsav — Campus Color Fiesta</h4>
+            <p class="text-xs text-slate-400 mt-1">Uniting campus batches with colors, music, and sweets.</p>
+          </div>
+        </div>
+
+        <!-- Image Item 5: Advitya Fest -->
+        <div class="media-item glass-card rounded-2xl overflow-hidden media-card" 
+             data-category="events" 
+             data-type="image" 
+             data-title="Advitya Cultural & Tech Summit" 
+             data-desc="Inter-college competitions, stage performances and exhibition"
+             data-date="February 2024">
+          <div class="relative h-64 overflow-hidden image-preview-trigger cursor-pointer group">
+            <img src="assets/images/events/advitya-fest.jpg" alt="Advitya Fest" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/20 backdrop-blur-md text-white text-xs font-semibold">
+                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i> Click to Enlarge
+              </span>
+            </div>
+            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-indigo-500/90 text-white">Annual Fest</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm font-heading">Advitya — Cultural & Tech Extravaganza</h4>
+            <p class="text-xs text-slate-400 mt-1">Showcasing student talent across 20+ competition tracks.</p>
+          </div>
+        </div>
+
+        <!-- Image Item 6: Convocation Ceremony -->
+        <div class="media-item glass-card rounded-2xl overflow-hidden media-card" 
+             data-category="events" 
+             data-type="image" 
+             data-title="University Convocation Ceremony" 
+             data-desc="Degree conferral and graduation felicitation ceremony"
+             data-date="May 2024">
+          <div class="relative h-64 overflow-hidden image-preview-trigger cursor-pointer group">
+            <img src="assets/images/events/convocation-day.jpg" alt="Convocation Ceremony" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/20 backdrop-blur-md text-white text-xs font-semibold">
+                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i> Click to Enlarge
+              </span>
+            </div>
+            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-500/90 text-white">Graduation</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm font-heading">Annual Convocation Day 2024</h4>
+            <p class="text-xs text-slate-400 mt-1">Honoring graduates and academic medal recipients.</p>
+          </div>
+        </div>
+
+        <!-- Image Item 7: Rajasthan Tour -->
+        <div class="media-item glass-card rounded-2xl overflow-hidden media-card" 
+             data-category="events" 
+             data-type="image" 
+             data-title="Rajasthan Heritage Cultural Tour" 
+             data-desc="Student educational tour exploring architectural landmarks"
+             data-date="January 2024">
+          <div class="relative h-64 overflow-hidden image-preview-trigger cursor-pointer group">
+            <img src="assets/images/events/rajasthan-cultural-tour.jpg" alt="Rajasthan Tour" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/20 backdrop-blur-md text-white text-xs font-semibold">
+                <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i> Click to Enlarge
+              </span>
+            </div>
+            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/90 text-white">Educational</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm font-heading">Rajasthan Heritage & Cultural Tour</h4>
+            <p class="text-xs text-slate-400 mt-1">Exploring historical monuments and traditional arts.</p>
+          </div>
+        </div>
+
+        <!-- Video Item 1: Holi Celebration -->
+        <div class="media-item glass-card rounded-2xl overflow-hidden media-card" 
+             data-category="festivals" 
+             data-type="video" 
+             data-title="Holi Celebration — Live Fest Highlights" 
+             data-desc="4K video coverage of student celebrations and DJ performance"
+             data-date="March 2024">
+          <div class="relative bg-black h-64 flex items-center justify-center">
+            <video src="assets/videos/holi-celebration.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
+            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-pink-600 text-white pointer-events-none">Video Reel</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm font-heading">Holi Fest — Live Highlight Reel</h4>
+            <p class="text-xs text-slate-400 mt-1">Campus-wide color festival and student celebrations.</p>
+          </div>
+        </div>
+
+        <!-- Video Item 2: Garba Night -->
+        <div class="media-item glass-card rounded-2xl overflow-hidden media-card" 
+             data-category="festivals" 
+             data-type="video" 
+             data-title="Navratri Garba & Dandiya Night" 
+             data-desc="Traditional folk dance celebration and musical night"
+             data-date="October 2024">
+          <div class="relative bg-black h-64 flex items-center justify-center">
+            <video src="assets/videos/garba-night.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
+            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-600 text-white pointer-events-none">Video Reel</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm font-heading">Navratri Garba & Dandiya Night</h4>
+            <p class="text-xs text-slate-400 mt-1">Traditional attire, folk beats, and Dandiya dance.</p>
+          </div>
+        </div>
+
+        <!-- Video Item 3: Convocation Ceremony -->
+        <div class="media-item glass-card rounded-2xl overflow-hidden media-card" 
+             data-category="events" 
+             data-type="video" 
+             data-title="Convocation Degree Conferral Recap" 
+             data-desc="Official video highlights of the graduation ceremony"
+             data-date="May 2024">
+          <div class="relative bg-black h-64 flex items-center justify-center">
+            <video src="assets/videos/convocation-ceremony.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
+            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-600 text-white pointer-events-none">Video Reel</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm font-heading">Convocation Degree Conferral Recap</h4>
+            <p class="text-xs text-slate-400 mt-1">Convocation procession and felicitation memories.</p>
+          </div>
+        </div>
+
+        <!-- Video Item 4: Music Concert -->
+        <div class="media-item glass-card rounded-2xl overflow-hidden media-card" 
+             data-category="events" 
+             data-type="video" 
+             data-title="Campus Music Concert & Live Band" 
+             data-desc="Electrifying live stage performances by university music society"
+             data-date="April 2024">
+          <div class="relative bg-black h-64 flex items-center justify-center">
+            <video src="assets/videos/music-concert.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
+            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-600 text-white pointer-events-none">Video Reel</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm font-heading">Campus Music Concert & Live Band</h4>
+            <p class="text-xs text-slate-400 mt-1">Live rock band performances and musical night.</p>
+          </div>
+        </div>
+
+        <!-- Video Item 5: Workshop -->
+        <div class="media-item glass-card rounded-2xl overflow-hidden media-card" 
+             data-category="events" 
+             data-type="video" 
+             data-title="Leadership & Personality Development" 
+             data-desc="Interactive soft skills and corporate preparedness workshop"
+             data-date="March 2024">
+          <div class="relative bg-black h-64 flex items-center justify-center">
+            <video src="assets/videos/personality-development.mp4" controls preload="metadata" class="w-full h-full object-cover"></video>
+            <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-600 text-white pointer-events-none">Video Reel</span>
+          </div>
+          <div class="p-4">
+            <h4 class="font-bold text-white text-sm font-heading">Personality Development Workshop</h4>
+            <p class="text-xs text-slate-400 mt-1">Industry mentoring and communication skills sessions.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= UPCOMING EVENTS SECTION ================= -->
+  <section id="events" class="py-16 bg-slate-950/60 border-t border-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+        <div>
+          <span class="text-xs font-bold text-orange-400 tracking-wider uppercase">Mark Your Calendar</span>
+          <h2 class="text-2xl sm:text-3xl font-bold text-white font-heading mt-1">Upcoming Campus Fests & Dates</h2>
+        </div>
+        <p class="text-xs sm:text-sm text-slate-400 mt-2 md:mt-0 max-w-md">
+          Stay updated with forthcoming cultural summits, hackathons, and athletic tournaments.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="glass-card p-6 rounded-3xl border border-slate-800 flex items-start space-x-4">
+          <div class="w-14 h-14 rounded-2xl bg-orange-500/10 border border-orange-500/20 text-orange-400 flex flex-col items-center justify-center shrink-0">
+            <span class="text-[10px] uppercase font-bold">OCT</span>
+            <span class="text-lg font-extrabold font-heading">18</span>
+          </div>
+          <div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-orange-500/20 text-orange-400">Cultural</span>
+            <h4 class="text-base font-bold text-white font-heading mt-1">Dandiya Night 2026</h4>
+            <p class="text-xs text-slate-400 mt-1">Grand university sports ground | 6:30 PM</p>
+          </div>
+        </div>
+
+        <div class="glass-card p-6 rounded-3xl border border-slate-800 flex items-start space-x-4">
+          <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex flex-col items-center justify-center shrink-0">
+            <span class="text-[10px] uppercase font-bold">NOV</span>
+            <span class="text-lg font-extrabold font-heading">05</span>
+          </div>
+          <div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-400">Technical</span>
+            <h4 class="text-base font-bold text-white font-heading mt-1">HackVita 36-Hr Hackathon</h4>
+            <p class="text-xs text-slate-400 mt-1">Innovation Lab Block B | 9:00 AM</p>
+          </div>
+        </div>
+
+        <div class="glass-card p-6 rounded-3xl border border-slate-800 flex items-start space-x-4">
+          <div class="w-14 h-14 rounded-2xl bg-pink-500/10 border border-pink-500/20 text-pink-400 flex flex-col items-center justify-center shrink-0">
+            <span class="text-[10px] uppercase font-bold">DEC</span>
+            <span class="text-lg font-extrabold font-heading">12</span>
+          </div>
+          <div>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-pink-500/20 text-pink-400">Flagship</span>
+            <h4 class="text-base font-bold text-white font-heading mt-1">Winter Carnival & Alumni Gala</h4>
+            <p class="text-xs text-slate-400 mt-1">Main University Amphitheatre | 5:00 PM</p>
+          </div>
+        </div>
+
       </div>
 
     </div>
   </section>
 
   <!-- ================= LIGHTBOX MODAL ================= -->
-  <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4" onclick="closeLightbox()">
-    <button class="absolute top-6 right-6 p-3 rounded-full bg-white/20 text-white hover:bg-white/30 z-50" onclick="closeLightbox()">
+  <div id="lightbox-modal" class="lightbox-modal fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl lightbox-backdrop">
+    
+    <!-- Close Button -->
+    <button id="lightbox-close" class="absolute top-5 right-5 z-50 p-3 rounded-full bg-slate-900/80 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 transition-all">
       <i data-lucide="x" class="w-6 h-6"></i>
     </button>
-    <div class="max-w-4xl w-full flex flex-col items-center" onclick="event.stopPropagation()">
-      <img id="lightbox-img" src="" alt="Preview" class="max-h-[75vh] w-auto rounded-2xl shadow-2xl object-contain border border-white/20">
-      <div class="mt-4 text-center">
-        <h3 id="lightbox-title" class="text-xl font-bold text-white"></h3>
-        <p id="lightbox-desc" class="text-white/80 text-xs mt-1"></p>
+
+    <!-- Prev Button -->
+    <button id="lightbox-prev" class="absolute left-4 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-slate-900/80 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 transition-all">
+      <i data-lucide="chevron-left" class="w-6 h-6"></i>
+    </button>
+
+    <!-- Next Button -->
+    <button id="lightbox-next" class="absolute right-4 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-slate-900/80 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 transition-all">
+      <i data-lucide="chevron-right" class="w-6 h-6"></i>
+    </button>
+
+    <!-- Modal Content Card -->
+    <div class="lightbox-content max-w-4xl w-full bg-slate-950 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl flex flex-col">
+      <div class="relative max-h-[70vh] bg-black flex items-center justify-center overflow-hidden">
+        <img id="lightbox-image" src="" alt="Modal View" class="max-h-[70vh] w-auto max-w-full object-contain">
+      </div>
+      <div class="p-6 bg-slate-900/90 border-t border-slate-800 flex items-center justify-between">
+        <div>
+          <span id="lightbox-category" class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-orange-500/20 text-orange-400 border border-orange-500/30">CATEGORY</span>
+          <h3 id="lightbox-title" class="text-lg font-bold text-white font-heading mt-2">Event Title</h3>
+        </div>
+        <div class="text-right">
+          <span id="lightbox-date" class="text-xs text-slate-400">Date</span>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- ================= FOOTER ================= -->
-  <footer class="mt-auto py-8 text-center text-xs text-white/80 border-t border-white/20">
-    <p>&copy; 2026 NewsVita • <b>VIT Bhopal University</b>. Developed by <b>Apoorv</b> (@code-with-apoorv).</p>
+  <footer class="mt-auto bg-slate-950 border-t border-slate-900 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        
+        <div class="flex items-center space-x-3">
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-orange-500 to-pink-600 flex items-center justify-center text-white">
+            <i data-lucide="newspaper" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <span class="text-base font-bold text-white font-heading">NewsVita</span>
+            <span class="text-xs text-slate-500 ml-2">Campus Media & Event Hub</span>
+          </div>
+        </div>
+
+        <div class="text-xs text-slate-500 text-center md:text-right">
+          Designed & Engineered with Vanilla JS, Tailwind CSS & HTML5. <br>
+          Maintained by <span class="text-slate-300 font-medium">Student Media Committee</span>.
+        </div>
+
+      </div>
+    </div>
   </footer>
 
-  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
   <script>
-    const onchangeView = (view) => {
-      const video = document.getElementById("videos");
-      const image = document.getElementById("photos");
-      const btnPhotos = document.getElementById("btn-photos");
-      const btnVideos = document.getElementById("btn-videos");
-      
-      if (view === "image") {
-        video.style.display = "none";
-        image.style.display = "block";
-        btnPhotos.classList.add("active");
-        btnVideos.classList.remove("active");
-      } else {
-        video.style.display = "block";
-        image.style.display = "none";
-        btnVideos.classList.add("active");
-        btnPhotos.classList.remove("active");
-      }
-    };
-
-    const openLightbox = (src, title, desc) => {
-      document.getElementById('lightbox-img').src = src;
-      document.getElementById('lightbox-title').innerText = title;
-      document.getElementById('lightbox-desc').innerText = desc;
-      const modal = document.getElementById('lightbox-modal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-    };
-
-    const closeLightbox = () => {
-      const modal = document.getElementById('lightbox-modal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-    };
-
     // Initialize Lucide Icons
     lucide.createIcons();
   </script>
-
 </body>
 </html>
