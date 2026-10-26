@@ -1,4 +1,4 @@
-﻿# Operating System Files
+# Operating System Files
 .DS_Store
 .DS_Store?
 ._*
@@ -29,3 +29,5 @@ yarn-debug.log*
 yarn-error.log*
 tmp/
 temp/
+server/data/*.db
+*.sqlite
